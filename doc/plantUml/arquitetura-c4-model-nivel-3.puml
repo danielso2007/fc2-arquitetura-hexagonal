@@ -1,0 +1,31 @@
+' ---------------------------
+' Level 3 — Component Diagram (exemplo: fluxo de cadastro/entidade principal inferida)
+' ---------------------------
+@startuml arquitetura-c4-model-nivel-3
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+
+LAYOUT_WITH_LEGEND()
+
+
+Container(api, "API HTTP / main")
+Container_Boundary(appBoundary, "application") {
+Component(handler, "HTTP Handler / Controller", "recebe request e mapeia DTO")
+Component(usecase, "UseCase (application service)", "orquestra a operação de negócio")
+Component(dto, "DTO / Request Mapper", "validação mínima")
+}
+
+
+Container_Boundary(adaptersBoundary, "adapters") {
+Component(repoPort, "Repository (interface)", "porta para persistência")
+Component(sqliteImpl, "SQLite Adapter", "implementa Repository — usa db.sqlite")
+}
+
+
+Rel(api, handler, "HTTP -> Handler")
+Rel(handler, usecase, "chama")
+Rel(usecase, repoPort, "usa")
+Rel(repoPort, sqliteImpl, "implements")
+
+
+@enduml

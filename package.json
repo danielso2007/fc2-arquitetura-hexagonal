@@ -1,0 +1,19 @@
+{
+  "name": "fc2-arquitetura-hexagonal",
+  "version": "1.4.1",
+  "description": "Projeto de estudo do curso de arquitetura.",
+  "scripts": {
+    "release": "standard-version"
+  },
+  "keywords": [],
+  "author": "Daniel Oliveira",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "standard-version": "^9.5.0"
+  },
+  "dependencies": {}
+}

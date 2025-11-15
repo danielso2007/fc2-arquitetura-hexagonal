@@ -1,0 +1,31 @@
+' ---------------------------
+' Level 2 — Container Diagram (mapped to repo folders)
+' ---------------------------
+@startuml arquitetura-c4-model-nivel-2
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
+LAYOUT_WITH_LEGEND()
+
+
+Person(user, "Usuário")
+System_Boundary(s1, "fc2-arquitetura-hexagonal") {
+Container(cmd, "cmd/main.go", "Go", "Entrypoint: inicializa servidor, wiring de adapters")
+Container(api, "main.go / server", "Go (net/http)", "HTTP handlers / controllers")
+Container(app, "application", "Go packages", "Application services / usecases")
+Container(adapters, "adapters", "Go packages", "Infra adapters: persistence, migrations, http adapters")
+}
+
+
+Container_Ext(sqlite, "SQLite (db.sqlite)", "DB")
+Container_Ext(docker, "docker-compose", "Orquestra: sqlite / serviços auxiliares")
+
+
+Rel(user, api, "HTTP")
+Rel(api, app, "Chama usecases (application)")
+Rel(app, adapters, "Usa adapters (persistência, gateways)")
+Rel(adapters, sqlite, "SQL queries / gravação")
+Rel(cmd, api, "Inicializa / configura")
+
+
+@enduml

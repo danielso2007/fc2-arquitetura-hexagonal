@@ -1,0 +1,20 @@
+@startuml arquitetura-sequencia
+' Diagrama de sequência plain PlantUML - compatível e sem dependências externas
+
+actor Client as user
+participant "API / main" as server
+participant "HTTP Handler" as handler
+participant "Application UseCase" as usecase
+participant "Repository (interface)" as repo
+participant "SQLite Adapter" as sqlite
+
+user -> server: POST /entities
+server -> handler: Handle(request)
+handler -> usecase: Execute(dto)
+usecase -> repo: Save(entity)
+repo -> sqlite: "INSERT INTO table (...)\nVALUES (...)" 
+sqlite --> repo: result
+usecase --> handler: success
+handler --> server: 201 Created
+server --> user: 201 Created
+@enduml

@@ -1,0 +1,29 @@
+' PlantUML C4 diagrams generated from repository: https://github.com/danielso2007/fc2-arquitetura-hexagonal
+' Mapeamento inferido: folders found — cmd (entry), application (usecases), adapters (infra/adapters), main.go, db.sqlite, docker-compose.yaml.
+' Use estes diagrams em conjunto com C4-PlantUML includes.
+
+
+' ---------------------------
+' Level 1 — System Context (repo-specific)
+' ---------------------------
+@startuml arquitetura-c4-model-nivel-1
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+
+LAYOUT_WITH_LEGEND()
+
+
+Person(user, "Usuário", "Cliente que consome a API")
+System_Boundary(s1, "fc2-arquitetura-hexagonal") {
+System(api, "Aplicação Go (main.go)", "Serviço HTTP / CLI — entrypoint: cmd/main")
+}
+System_Ext(sqlite, "SQLite (db.sqlite)", "Armazenamento local usado em desenvolvimento")
+System_Ext(docker, "Docker / Serviços externos", "docker-compose para infra local")
+
+
+Rel(user, api, "HTTP / CLI")
+Rel(api, sqlite, "Lê/Grava dados (SQLite)")
+Rel(api, docker, "Orquestra serviços locais")
+
+
+@enduml

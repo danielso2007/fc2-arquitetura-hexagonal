@@ -1,1 +1,5 @@
 .idea
+dist
+out/plantUml
+node_modules
+node_modules/

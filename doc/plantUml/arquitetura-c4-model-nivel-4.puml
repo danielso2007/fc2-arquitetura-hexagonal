@@ -1,0 +1,70 @@
+@startuml arquitetura-c4-model-nivel-4
+' C4 — Level 4 (Code). Diagrama de classes/structs que representa o fluxo RegisterUser
+' Use este arquivo como code-level (classes/structs/interfaces) do C4.
+
+skinparam classAttributeIconSize 0
+
+class User {
+  +ID string
+  +Name string
+  +Email string
+}
+
+class RegisterUserDTO {
+  +Name string
+  +Email string
+  +Password string
+}
+
+class UserController {
+  +Handle(req Request) Response
+  -validator Validator
+  -usecase *RegisterUserUseCase
+}
+
+class RegisterUserUseCase {
+  +Execute(dto RegisterUserDTO) (User, error)
+  -repo UserRepository
+  -notifier EmailNotifier
+}
+
+interface UserRepository {
+  +Save(u User) error
+  +FindByEmail(email string) (User, error)
+}
+
+class PostgresUserRepo {
+  +Save(u User) error
+  +FindByEmail(email string) (User, error)
+  -db *sql.DB
+}
+
+interface EmailNotifier {
+  +SendWelcome(to string) error
+}
+
+class SMTPNotifier {
+  +SendWelcome(to string) error
+  -client SMTPClient
+}
+
+' Relações/associações (diretas e heranças)
+UserController --> RegisterUserUseCase : uses
+RegisterUserUseCase ..> UserRepository : depends on
+RegisterUserUseCase ..> EmailNotifier : depends on
+UserRepository <|.. PostgresUserRepo
+EmailNotifier <|.. SMTPNotifier
+RegisterUserUseCase --> User : creates/returns
+
+' Notas rápidas (comentários)
+note left of UserController
+  Local: cmd/http handlers or controllers
+  Constructor inject: NewUserController(validator, usecase)
+end note
+
+note right of PostgresUserRepo
+  Impl: adapters/persistence/postgres
+  Side-effects confined to adapters (DB I/O)
+end note
+
+@enduml
