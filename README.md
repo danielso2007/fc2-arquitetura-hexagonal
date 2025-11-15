@@ -1,4 +1,3 @@
-[![Node.js CI](https://github.com/danielso2007/fc2-arquitetura-hexagonal/actions/workflows/node.js.yml/badge.svg)](https://github.com/danielso2007/fc2-arquitetura-hexagonal/actions/workflows/node.js.yml)
 ![GitHub package version](https://img.shields.io/github/package-json/v/danielso2007/fc2-arquitetura-hexagonal.svg)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/danielso2007/fc2-arquitetura-hexagonal.svg)](https://github.com/danielso2007/fc2-arquitetura-hexagonal/pulls)
 [![GitHub issues](https://img.shields.io/github/issues/danielso2007/fc2-arquitetura-hexagonal.svg)](https://github.com/danielso2007/fc2-arquitetura-hexagonal/issues?q=is%3Aopen+is%3Aissue)
@@ -12,6 +11,23 @@
 Para estudo.
 
 ### Iniciando o projeto
+
+Para executar o GO, usamos o docker:
+
+- `docker compose up -d`
+
+Dentro do container, execute o GO em http:
+
+- `docker exec -it appproduct bash`
+
+Subir o servidor no GO:
+
+- `go run main.go http`
+
+
+### Consumindo
+
+Obtenha a collection do Postman (pasta `postman`) e use a aplicação.
 
 # Estrutura do projeto
 

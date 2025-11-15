@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "c3ca3b12-decd-4945-a28c-1726f7beb05e",
+		"name": "fc2-arquitetura-hexagonal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1447676",
+		"_collection_link": "https://azul-financeiro-lote.postman.co/workspace/Curso-Arquitetura~a5b9114c-12ee-4f13-92d4-5814f6905c73/collection/1447676-c3ca3b12-decd-4945-a28c-1726f7beb05e?action=share&source=collection_link&creator=1447676"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "CreateProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Teste Produto 01\",\n    \"price\": 123.90\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CreateProduct",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Teste Produto 01\",\n    \"price\": 123.90\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/product",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"product"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"ID\": \"8a1e1f71-e962-4571-8f35-abea02d13552\",\n    \"Name\": \"Teste Produto 02\",\n    \"Price\": 0,\n    \"Status\": \"disabled\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
